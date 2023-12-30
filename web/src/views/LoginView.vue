@@ -3,7 +3,6 @@
     <el-main>
       <el-card shadow="always">
         <el-form class="login-form">
-          <img src="/logo.png" alt="logo" style="width: 100px" />
           <p>
             <span>自动数据上传工具</span>
           </p>

@@ -3,13 +3,19 @@
     <el-container>
       <el-aside width="200px">
         <div class="logo">
-          <img src="/logo.png" alt="logo" style="width: 100px" />
+          <div class="logo_img">
+            <img src="/img/icon_dist.jpg" alt="" />
+          </div>
           <p>
-            <span>智能合同解析系统</span>
+            <span>小石潭记</span>
           </p>
-          <left-menu></left-menu>
         </div>
-        <div class="bottom-div"></div>
+        <div class="gitLink">
+          <el-link type="primary" @click="goGitHub"
+            >gitHub<Link style="width: 1em; height: 1em; margin-right: 8px"
+          /></el-link>
+        </div>
+        <left-menu></left-menu>
       </el-aside>
       <el-container>
         <el-main>
@@ -20,7 +26,12 @@
   </div>
 </template>
 <script setup>
-import LeftMenu from '@/components/LeftMenu.vue';
+import LeftMenu from '@/components/LeftMenu.vue'
+import { Link } from '@element-plus/icons-vue'
+
+const goGitHub = () => {
+  window.open('https://github.com/nt1107/XiaoShiTanJi')
+}
 </script>
 <style lang="less" scoped>
 .common-layout {
@@ -30,44 +41,28 @@ import LeftMenu from '@/components/LeftMenu.vue';
     height: 100%;
   }
 
-  .el-header,
-  .el-footer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--el-color-primary-light-9);
-    color: var(--el-text-color-primary);
-    text-align: center;
-  }
-
   .el-aside {
     height: 100%;
     color: var(--el-text-color-primary);
     text-align: center;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: column;
-    justify-self: stretch;
-
     .logo {
-      margin-top: 40px;
-      height: calc(100% - 40px);
-
-      span {
-        font-family: '微软雅黑 Bold', '微软雅黑', serif;
-        font-weight: 700;
-        font-style: normal;
-        font-size: 16px;
-        color: rgb(58, 66, 107);
-        text-align: center;
-        border-width: 0;
+      margin-top: 10px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .logo_img {
+        width: 100px;
+        height: 100px;
+        img {
+          border-radius: 50%;
+        }
       }
     }
-
-    .user-info {
-      margin-bottom: 36px;
+    .gitLink {
+      height: 30px;
     }
   }
 

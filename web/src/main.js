@@ -3,7 +3,6 @@ import { createPinia } from 'pinia';
 import SvgIcon from '@/components/svgIcon/index.vue';
 
 import 'normalize.css/normalize.css';
-import './assets/custom.css';
 
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';

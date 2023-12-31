@@ -12,6 +12,5 @@ export default ({ mode }) => {
         '@': fileURLToPath(new URL('./src', import.meta.url))
       }
     }
-    // base: `/${loadEnv(mode, process.cwd()).VITE_API_BASE}`
   })
 }

@@ -1,5 +1,5 @@
 const { https, router, db, app } = require('./config.js')
-const koaBody = require('koa-body')
+const { koaBody } = require('koa-body')
 const XLSX = require('xlsx')
 
 app.use(

@@ -1,6 +1,7 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import splitVideo from '@/components/juejin/splitVideo/splitVideo.vue'
+import excelView from '@/views/excel/index.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -17,6 +18,10 @@ const router = createRouter({
           component: splitVideo
         }
       ]
+    }, {
+      path: '/excelView',
+      name: 'excelView',
+      component: excelView
     }
   ]
 })

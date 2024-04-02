@@ -4,6 +4,7 @@ var Router = require('koa-router')
 const db = require('./database')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
+const path = require('path')
 
 const https = require('https')
 const sslify = require('koa-sslify').default

@@ -8,9 +8,11 @@ const cors = require('koa2-cors')
 const https = require('https')
 const sslify = require('koa-sslify').default
 
+const homeDir = process.env.HOME || process.env.USERPROFILE
+
 const options = {
-  key: fs.readFileSync('../../ssl/www.xtr327.com.key'),
-  cert: fs.readFileSync('../../ssl/www.xtr327.com.pem')
+  key: fs.readFileSync(path.join(homeDir, 'ssl/www.xtr327.com.key')),
+  cert: fs.readFileSync(path.join(homeDir, 'ssl/www.xtr327.com.pem'))
 }
 
 const app = new Koa()

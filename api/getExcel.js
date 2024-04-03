@@ -26,31 +26,22 @@ module.exports = () => {
       const worksheet = workbook.Sheets[sheetName]
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 })
       let date = jsonData[1][4]
-      let sql = `INSERT INTO users (id, name, specification, unit, price, date, row_num)  VALUES (?, ?, ?, ?, ?, ?, ?);`
-      Promise.all(
-        jsonData.map((item, index) => {
-          if (index > 2) {
-            return db.query(sql, [
-              index,
-              item[1],
-              item[2],
-              item[3],
-              item[4],
-              date,
-              item[0]
-            ])
-          }
-        })
-      )
-        .then(() => {
-          ctx.body = {
-            message: '上传成功'
-          }
-        })
-        .catch((error) => {
-          console.error('插入数据块时出错', error)
-        })
+      let value = []
+      jsonData.map((item, index) => {
+        if (index > 2) {
+          value.push(
+            `(${index}, '${item[1]}', '${item[2]}', '${item[3]}', '${item[4]}', '${date}', '${item[0]}')`
+          )
+        }
+      })
+      let sql = `INSERT INTO users (id, name, specification, unit, price, date, row_num)  VALUES ${value.join(
+        ','
+      )};`
+      db.query(sql)
     })
+    ctx.body = {
+      message: '上传成功'
+    }
   })
 
   router.get('/getLineDate', async (ctx) => {

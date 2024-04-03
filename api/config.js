@@ -19,10 +19,17 @@ const options = {
 const app = new Koa()
 app.use(
   cors({
-    origin: '*', // 允许任何源访问
-    allowMethods: ['GET', 'POST', 'PUT'], // 允许的HTTP方法
-    allowHeaders: ['Content-Type', 'Authorization'], // 允许的HTTP头
-    credentials: true // 是否允许发送cookie
+    origin: '*', // 在生产环境中替换为具体的源地址
+    allowMethods: ['GET', 'POST', 'OPTIONS'], // 允许的方法，包括文件上传的 POST 方法
+    allowHeaders: [
+      'Content-Type',
+      'Authorization',
+      'Origin',
+      'Accept',
+      'X-Requested-With'
+    ], // 允许的头部，包括 Content-Type
+    credentials: true, // 如果需要发送 cookie，设置为 true
+    maxAge: 86400 // 预检请求的缓存时间（单位：秒）
   })
 )
 

@@ -17,26 +17,17 @@ const options = {
 }
 
 const app = new Koa()
-app.use(
-  cors({
-    origin: '*',
-    credentials: true,
-    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
-    allowMethods: ['OPTIONS', 'GET', 'PUT', 'POST', 'DELETE'],
-    allowHeaders: [
-      'x-requested-with',
-      'accept',
-      'origin',
-      'content-type',
-      'Referer',
-      'Sec-Ch-Ua',
-      'Sec-Ch-Ua-Mobile',
-      'Sec-Ch-Ua-Platform',
-      'User-Agent'
-    ],
-    maxAge: 1728000
-  })
-)
+
+app.use(async (ctx, next) => {
+  // 设置CORS响应头
+  ctx.set('Access-Control-Allow-Origin', '*') // 允许任何源访问
+  ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT') // 允许的HTTP方法
+  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization') // 允许的HTTP头
+  ctx.set('Access-Control-Allow-Credentials', true) // 是否允许发送cookie
+
+  // 继续处理请求
+  await next()
+})
 
 app.use(sslify())
 

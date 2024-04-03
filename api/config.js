@@ -17,7 +17,14 @@ const options = {
 }
 
 const app = new Koa()
-app.use(cors())
+app.use(
+  cors({
+    origin: '*', // 允许任何源访问
+    allowMethods: ['GET', 'POST', 'PUT'], // 允许的HTTP方法
+    allowHeaders: ['Content-Type', 'Authorization'], // 允许的HTTP头
+    credentials: true // 是否允许发送cookie
+  })
+)
 
 app.use(sslify())
 

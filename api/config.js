@@ -17,6 +17,7 @@ const options = {
 }
 
 const app = new Koa()
+app.use(cors())
 
 app.use(sslify())
 
@@ -32,7 +33,6 @@ var router = new Router()
 
 router.prefix('/api')
 app.use(bodyParser())
-app.use(cors())
 app.use(router.routes()).use(router.allowedMethods())
 
 module.exports = {

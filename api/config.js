@@ -19,17 +19,14 @@ const options = {
 const app = new Koa()
 app.use(
   cors({
-    origin: 'https://www.xtr327.com', // 在生产环境中替换为具体的源地址
-    allowMethods: ['GET', 'POST', 'OPTIONS'], // 允许的方法，包括文件上传的 POST 方法
-    allowHeaders: [
-      'Content-Type',
-      'Authorization',
-      'Origin',
-      'Accept',
-      'X-Requested-With'
-    ], // 允许的头部，包括 Content-Type
-    credentials: true, // 如果需要发送 cookie，设置为 true
-    maxAge: 86400 // 预检请求的缓存时间（单位：秒）
+    // 设置允许跨域的源，可以是具体的域名或 '*'
+    origin: '*',
+    // 允许跨域的 HTTP 方法
+    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    // 设置是否允许发送凭据（例如，跨域的 cookies）
+    credentials: true,
+    // 设置是否允许在响应头中暴露请求头信息（例如，'X-Requested-With'）
+    exposeHeaders: ['X-Requested-With']
   })
 )
 

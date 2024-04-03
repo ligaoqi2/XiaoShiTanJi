@@ -30,6 +30,18 @@ app.use(
   })
 )
 
+// 添加处理 OPTIONS 请求的中间件
+app.use(async (ctx, next) => {
+  if (ctx.method === 'OPTIONS') {
+    ctx.status = 200
+    ctx.set('Access-Control-Allow-Origin', '*')
+    ctx.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
+    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+  } else {
+    await next()
+  }
+})
+
 app.use(sslify())
 
 https.createServer(options, app.callback()).listen(3000, (err) => {

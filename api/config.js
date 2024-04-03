@@ -19,28 +19,24 @@ const options = {
 const app = new Koa()
 app.use(
   cors({
-    // 设置允许跨域的源，可以是具体的域名或 '*'
     origin: '*',
-    // 允许跨域的 HTTP 方法
-    allowMethods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    // 设置是否允许发送凭据（例如，跨域的 cookies）
     credentials: true,
-    // 设置是否允许在响应头中暴露请求头信息（例如，'X-Requested-With'）
-    exposeHeaders: ['X-Requested-With']
+    exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+    allowMethods: ['OPTIONS', 'GET', 'PUT', 'POST', 'DELETE'],
+    allowHeaders: [
+      'x-requested-with',
+      'accept',
+      'origin',
+      'content-type',
+      'Referer',
+      'Sec-Ch-Ua',
+      'Sec-Ch-Ua-Mobile',
+      'Sec-Ch-Ua-Platform',
+      'User-Agent'
+    ],
+    maxAge: 1728000
   })
 )
-
-// 添加处理 OPTIONS 请求的中间件
-app.use(async (ctx, next) => {
-  if (ctx.method === 'OPTIONS') {
-    ctx.status = 200
-    ctx.set('Access-Control-Allow-Origin', '*')
-    ctx.set('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS')
-    ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-  } else {
-    await next()
-  }
-})
 
 app.use(sslify())
 

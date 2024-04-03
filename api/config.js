@@ -19,7 +19,7 @@ const options = {
 const app = new Koa()
 app.use(
   cors({
-    origin: 'https://www.xtr327.com:8081', // 在生产环境中替换为具体的源地址
+    origin: 'https://www.xtr327.com', // 在生产环境中替换为具体的源地址
     allowMethods: ['GET', 'POST', 'OPTIONS'], // 允许的方法，包括文件上传的 POST 方法
     allowHeaders: [
       'Content-Type',

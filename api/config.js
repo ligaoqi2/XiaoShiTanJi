@@ -19,6 +19,7 @@ const options = {
 const app = new Koa()
 
 app.use(async (ctx, next) => {
+  console.log(111, ctx)
   // 设置CORS响应头
   ctx.set('Access-Control-Allow-Origin', '*') // 允许任何源访问
   ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT') // 允许的HTTP方法

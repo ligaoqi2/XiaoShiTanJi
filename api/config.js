@@ -18,17 +18,7 @@ const options = {
 
 const app = new Koa()
 
-app.use(async (ctx, next) => {
-  console.log(111, ctx)
-  // 设置CORS响应头
-  ctx.set('Access-Control-Allow-Origin', '*') // 允许任何源访问
-  ctx.set('Access-Control-Allow-Methods', 'GET, POST, PUT') // 允许的HTTP方法
-  ctx.set('Access-Control-Allow-Headers', 'Content-Type, Authorization') // 允许的HTTP头
-  ctx.set('Access-Control-Allow-Credentials', true) // 是否允许发送cookie
-
-  // 继续处理请求
-  await next()
-})
+app.use(cors())
 
 app.use(sslify())
 

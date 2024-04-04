@@ -17,17 +17,21 @@ module.exports = () => {
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 })
       let date = jsonData[1][4]
       let value = []
+      let id = 0
       jsonData.map(async (item, index) => {
         if (index > 2) {
           value.push(
-            `(${index}, '${item[1]}', '${item[2]}', '${item[3]}', '${item[4]}', '${date}', '${item[0]}')`
+            `(${id++}, '${item[1]}', '${item[2]}', '${item[3]}', '${
+              item[4]
+            }', '${date}', '${item[0]}')`
           )
         }
       })
       let sql = `INSERT INTO excel_data (id, name, specification, unit, price, date, row_num)  VALUES ${value.join(
         ','
       )};`
-      await db.query(sql)
+      const res = await db.query(sql)
+      console.log(121, res)
     })
     ctx.body = {
       message: '上传成功'

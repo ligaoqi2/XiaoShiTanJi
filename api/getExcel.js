@@ -21,9 +21,9 @@ module.exports = () => {
       jsonData.map(async (item, index) => {
         if (index > 2) {
           value.push(
-            `(${id++}, '${item[1]}', '${item[2]}', '${item[3]}', '${
-              item[4]
-            }', '${date}', '${item[0]}')`
+            `(${id++}, '${item[1]}', '${
+              item[2] === undefined ? '' : item[2]
+            }', '${item[3]}', '${item[4]}', '${date}', '${item[0]}')`
           )
         }
       })
@@ -40,11 +40,9 @@ module.exports = () => {
 
   router.get('/getLineDate', async (ctx) => {
     const keyword = ctx.query.keyword
-    console.log(1222, ctx.query)
     const res = await db.query(
       `select * from excel_data where name LIKE '%${keyword}%'`
     )
-    console.log(12223, res)
     ctx.body = {
       status: 200,
       messgage: 'success',

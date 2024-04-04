@@ -78,7 +78,10 @@ const input = ref()
 
 const getData = async () => {
   const res = await getExcelLine({ keyword: input.value })
-  console.log(res)
+  tableData.value = res.result
+  if (res.result.length) {
+    date.value = res.result[0].date
+  }
 }
 
 const loading = ref(false)

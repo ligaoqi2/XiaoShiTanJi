@@ -12,6 +12,7 @@ module.exports = () => {
 
     const workbook = XLSX.readFile(file.filepath)
     const sheet_name_list = workbook.SheetNames
+    console.log(111, sheet_name_list)
     sheet_name_list.forEach(async (sheetName) => {
       const worksheet = workbook.Sheets[sheetName]
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 })

@@ -11,7 +11,7 @@ module.exports = () => {
     }
     await db.query(`DELETE FROM excel_data;`)
 
-    const workbook = XLSX.readFile(file.path)
+    const workbook = XLSX.readFile(file.filepath)
     const sheet_name_list = workbook.SheetNames
     sheet_name_list.forEach(async (sheetName) => {
       const worksheet = workbook.Sheets[sheetName]

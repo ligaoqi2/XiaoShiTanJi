@@ -39,8 +39,8 @@ module.exports = () => {
   })
 
   router.get('/getLineDate', async (ctx) => {
-    const keyword = ctx.request.body.keyword
-    console.log(1222, ctx.request)
+    const keyword = ctx.query.keyword
+    console.log(1222, ctx.query)
     const res = await db.query(
       `select * from excel_data where name LIKE '%${keyword}%'`
     )

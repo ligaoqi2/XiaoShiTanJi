@@ -13,6 +13,7 @@ app.use(
 
 module.exports = () => {
   router.post('/newExcelFile', async (ctx) => {
+    console.log(111, ctx.request)
     const file = ctx.request.files.file // 获取上传的文件，假设前端表单的 name 为 "file"
     if (!file) {
       ctx.throw(400, 'No file uploaded.')

@@ -1,15 +1,5 @@
 const { https, router, db, app } = require('./config.js')
-const { koaBody } = require('koa-body')
 const XLSX = require('xlsx')
-
-app.use(
-  koaBody({
-    multipart: true, // 支持文件上传
-    formidable: {
-      maxFileSize: 2000 * 1024 * 1024 // 设置上传文件大小限制
-    }
-  })
-)
 
 module.exports = () => {
   router.post('/newExcelFile', async (ctx) => {

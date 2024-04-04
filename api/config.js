@@ -5,6 +5,7 @@ const db = require('./database')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 const path = require('path')
+const { koaBody } = require('koa-body')
 
 const https = require('https')
 const sslify = require('koa-sslify').default
@@ -19,7 +20,14 @@ const options = {
 const app = new Koa()
 
 app.use(cors())
-
+app.use(
+  koaBody({
+    multipart: true, // 支持文件上传
+    formidable: {
+      maxFileSize: 2000 * 1024 * 1024 // 设置上传文件大小限制
+    }
+  })
+)
 app.use(sslify())
 
 https.createServer(options, app.callback()).listen(3000, (err) => {

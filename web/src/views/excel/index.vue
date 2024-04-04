@@ -45,7 +45,7 @@
       >
         <el-table
           :data="tableData"
-          heigh="100%"
+          height="100%"
           border
           style="width: 100%"
           empty-text="在上面输入查询的名称，然后点击查找"
@@ -75,7 +75,7 @@ const changeHide = () => {
   showUpload.value = !showUpload.value
 }
 
-const input = ref()
+const input = ref('')
 
 const getData = async () => {
   const res = await getExcelLine({ keyword: input.value })

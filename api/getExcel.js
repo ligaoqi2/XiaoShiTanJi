@@ -25,9 +25,9 @@ module.exports = () => {
               item[2] === undefined ? '' : item[2]
             }', '${item[3]}', '${item[4]}', '${date}', '${item[0]}')`
           )
-        }
-        if (item[0] === undefined) {
-          console.log(sheetName, item, index, jsonData)
+          if (item[0] === undefined) {
+            console.log(sheetName, item, index, jsonData)
+          }
         }
       })
       let sql = `INSERT INTO excel_data (id, name, specification, unit, price, date, row_num)  VALUES ${value.join(

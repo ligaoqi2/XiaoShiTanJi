@@ -32,7 +32,7 @@
             >查找</el-button
           >
         </div>
-        <div class="line">
+        <div class="line" style="display: flex; justify-content: flex-end">
           <el-button type="primary" size="large" plain @click="clear"
             >重新查找</el-button
           >
@@ -45,6 +45,7 @@
       >
         <el-table
           :data="tableData"
+          heigh="100%"
           border
           style="width: 100%"
           empty-text="在上面输入查询的名称，然后点击查找"
@@ -63,7 +64,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { CaretBottom, CaretRight, UploadFilled } from '@element-plus/icons-vue'
 import { getExcelLine } from '@/api/index'
 const base_BASE = import.meta.env.VITE_API_BASE
@@ -86,20 +87,17 @@ const getData = async () => {
 
 const loading = ref(false)
 
-const tableData = ref([
-  {
-    name: '龙须面（干）',
-    specification: '20斤/件',
-    unit: '斤',
-    price: '2.5'
-  }
-])
+const tableData = ref([])
 const date = ref('4.1 - 5.1')
 
 const clear = () => {
   tableData.value = []
   input.value = ''
 }
+
+onMounted(() => {
+  getData()
+})
 </script>
 
 <style lang="less" scoped>
@@ -128,6 +126,9 @@ const clear = () => {
       width: 100%;
     }
   }
+  .main_content {
+    height: calc(100% - 35px);
+  }
   .operate_content {
     .line {
       padding: 0px 20px;
@@ -146,6 +147,7 @@ const clear = () => {
   }
   .table_content {
     padding: 10px;
+    height: calc(100% - 170px);
     :deep(.el-table) {
       .cell {
         padding: 0px;
@@ -155,6 +157,7 @@ const clear = () => {
       th.el-table__cell {
         font-weight: bolder !important;
         color: #000;
+        background-color: rgb(226, 239, 218);
       }
       --el-border-color-lighter: #000;
       .el-table__empty-text {

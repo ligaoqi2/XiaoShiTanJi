@@ -27,12 +27,14 @@ module.exports = () => {
             }', '${item[3]}', '${item[4]}', '${date}', '${item[0]}')`
           )
         }
+        if (item[0] === undefined) {
+          console.log(item)
+        }
       })
       let sql = `INSERT INTO excel_data (id, name, specification, unit, price, date, row_num)  VALUES ${value.join(
         ','
       )};`
       const res = await db.query(sql)
-      console.log(121, res)
     })
     ctx.body = {
       message: '上传成功'

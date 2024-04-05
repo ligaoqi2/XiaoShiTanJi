@@ -18,9 +18,6 @@ module.exports = () => {
       let date = jsonData[1][4]
       let value = []
       let id = 0
-      if (sheetName === '咸货、腌制品') {
-        console.log(jsonData)
-      }
       jsonData.map(async (item, index) => {
         if (index > 2 && item.length) {
           value.push(

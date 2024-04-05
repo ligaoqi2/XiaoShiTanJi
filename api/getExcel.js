@@ -23,7 +23,9 @@ module.exports = () => {
           value.push(
             `(${id++}, '${item[1]}', '${
               item[2] === undefined ? '' : item[2]
-            }', '${item[3]}', '${item[4]}', '${date}', '${item[0]}')`
+            }', '${item[3]}', '${item[4]}', '${date}', '${
+              item[0] ? item[0] : 0
+            }')`
           )
           if (item[0] === undefined) {
             console.log(sheetName, item, index, jsonData)

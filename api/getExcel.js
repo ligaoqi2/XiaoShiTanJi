@@ -23,7 +23,7 @@ module.exports = () => {
           value.push(
             `(${id++}, '${item[1]}', '${
               item[2] === undefined ? '' : item[2]
-            }', '${item[3]}', '${item[4]}', '${date}', '${
+            }', '${item[3]}', '${item[item.length - 1]}', '${date}', '${
               item[0] ? item[0] : 0
             }')`
           )

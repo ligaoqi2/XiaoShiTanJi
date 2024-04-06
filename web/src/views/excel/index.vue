@@ -27,14 +27,11 @@
             style="width: 240px"
             placeholder="输入名称进行查找"
             size="large"
+            clearable
+            @input="getData"
           />
           <el-button type="primary" size="large" @click="getData"
             >查找</el-button
-          >
-        </div>
-        <div class="line" style="display: flex; justify-content: flex-end">
-          <el-button type="primary" size="large" plain @click="clear"
-            >重新查找</el-button
           >
         </div>
       </div>
@@ -63,7 +60,7 @@
   </div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { ref, onMounted } from 'vue'
 import { CaretBottom, CaretRight, UploadFilled } from '@element-plus/icons-vue'
 import { getExcelLine } from '@/api/index'
@@ -77,12 +74,14 @@ const changeHide = () => {
 
 const input = ref('')
 
-const getData = async () => {
-  const res = await getExcelLine({ keyword: input.value })
+const getData = async (query) => {
+  loading.value = true
+  const res = await getExcelLine({ keyword: query || input.value })
   tableData.value = res.result
   if (res.result.length) {
     date.value = res.result[0].date
   }
+  loading.value = false
 }
 
 const loading = ref(false)
@@ -137,7 +136,8 @@ onMounted(() => {
       align-items: center;
       border: 1px solid #aaa;
       gap: 20px;
-      .el-input {
+      .el-input,
+      .el-select {
         flex: 1;
       }
       .el-button {

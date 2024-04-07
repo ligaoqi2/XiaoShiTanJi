@@ -1,6 +1,14 @@
 const { https, router, db, app } = require('./config.js')
 const XLSX = require('xlsx')
 
+const getDate = () => {
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = String(now.getMonth() + 1).padStart(2, '0')
+  const day = String(now.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 module.exports = () => {
   router.post('/newExcelFile', async (ctx) => {
     const file = ctx.request.files.file // 获取上传的文件，假设前端表单的 name 为 "file"
@@ -43,11 +51,22 @@ module.exports = () => {
   router.get('/getLineDate', async (ctx) => {
     const keyword = ctx.query.keyword
     const ip = ctx.request.ip
-    console.log('IP 地址:', ip)
-
-    // 获取 User-Agent
     const userAgent = ctx.request.get('User-Agent')
-    console.log('User-Agent:', userAgent)
+    let deviceModel
+    if (userAgent.includes('Android')) {
+      deviceModel = 'Android'
+    } else if (userAgent.includes('Windows')) {
+      deviceModel = 'Windows'
+    } else if (userAgent.includes('iPhone')) {
+      deviceModel = 'iPhone'
+    } else {
+      deviceModel = userAgent.slice(10, 20)
+    }
+
+    db.query(
+      `INSERT INTO excel_log (date, deviceModel, ip)  VALUES (${getDate()}, ${deviceModel}, ${ip})`
+    )
+
     const res = await db.query(
       `select * from excel_data where name LIKE '%${keyword}%'`
     )

@@ -8,12 +8,6 @@ module.exports = () => {
       ctx.throw(400, 'No file uploaded.')
       return
     }
-    const ip = ctx.request.ip
-    console.log('IP 地址:', ip)
-
-    // 获取 User-Agent
-    const userAgent = ctx.request.get('User-Agent')
-    console.log('User-Agent:', userAgent)
 
     await db.query(`DELETE FROM excel_data;`)
 
@@ -48,6 +42,12 @@ module.exports = () => {
 
   router.get('/getLineDate', async (ctx) => {
     const keyword = ctx.query.keyword
+    const ip = ctx.request.ip
+    console.log('IP 地址:', ip)
+
+    // 获取 User-Agent
+    const userAgent = ctx.request.get('User-Agent')
+    console.log('User-Agent:', userAgent)
     const res = await db.query(
       `select * from excel_data where name LIKE '%${keyword}%'`
     )

@@ -64,7 +64,7 @@ module.exports = () => {
     }
 
     db.query(
-      `INSERT INTO excel_log (date, deviceModel, ip)  VALUES (${getDate()}, ${deviceModel}, ${ip})`
+      `INSERT INTO excel_log (date, deviceModel, ip)  VALUES (${getDate()}, ${deviceModel}, ${ip});`
     )
 
     const res = await db.query(

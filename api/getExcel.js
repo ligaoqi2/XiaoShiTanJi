@@ -68,7 +68,7 @@ module.exports = () => {
     )
 
     const res = await db.query(
-      `select * from excel_data where name LIKE '%${keyword}%'`
+      `select * from excel_data where name LIKE '%${keyword}%';`
     )
     ctx.body = {
       status: 200,

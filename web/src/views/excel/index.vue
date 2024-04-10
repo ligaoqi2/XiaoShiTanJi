@@ -76,6 +76,7 @@ const input = ref('')
 
 const getData = async (query) => {
   loading.value = true
+  if (typeof query !== 'string') query = ''
   const res = await getExcelLine({ keyword: query || input.value })
   tableData.value = res.result
   if (res.result.length) {

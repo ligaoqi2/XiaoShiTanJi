@@ -30,7 +30,7 @@
             clearable
             @input="getData"
           />
-          <el-button type="primary" size="large" @click="getData"
+          <el-button type="primary" size="large" @click="getData('')"
             >查找</el-button
           >
         </div>

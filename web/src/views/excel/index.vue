@@ -64,6 +64,7 @@
 import { ref, onMounted } from 'vue'
 import { CaretBottom, CaretRight, UploadFilled } from '@element-plus/icons-vue'
 import { getExcelLine } from '@/api/index'
+import { ElMessage } from 'element-plus'
 const base_BASE = import.meta.env.VITE_API_BASE
 
 const showUpload = ref(false)
@@ -74,8 +75,8 @@ const changeHide = () => {
 
 const input = ref('')
 
-const getData = async (query) => {
-  loading.value = true
+const getData = async () => {
+  ElMessage.success(input.value)
   const res = await getExcelLine({ keyword: input.value })
   tableData.value = res.result
   if (res.result.length) {
@@ -88,11 +89,6 @@ const loading = ref(false)
 
 const tableData = ref([])
 const date = ref('4.1 - 5.1')
-
-const clear = () => {
-  tableData.value = []
-  input.value = ''
-}
 
 onMounted(() => {
   getData()

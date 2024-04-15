@@ -31,7 +31,7 @@ module.exports = () => {
       let value = []
       let id = 0
       jsonData.map(async (item, index) => {
-        if (index > 2 && item.length) {
+        if (index > 3 && item.length) {
           value.push(
             `(${id++}, '${item[1]}', '${
               item[2] === undefined ? '' : item[2]

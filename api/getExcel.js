@@ -27,7 +27,7 @@ module.exports = () => {
     sheet_name_list.forEach(async (sheetName) => {
       const worksheet = workbook.Sheets[sheetName]
       const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 })
-      let date = jsonData[1][4]
+      let date = jsonData[2][4]
       let value = []
       let id = 0
       jsonData.map(async (item, index) => {

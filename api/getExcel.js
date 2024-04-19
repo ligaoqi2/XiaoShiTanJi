@@ -53,31 +53,38 @@ module.exports = () => {
 
   router.get('/getLineDate', async (ctx) => {
     const keyword = ctx.query.keyword
-    const ip = ctx.request.ip
-    const userAgent = ctx.request.get('User-Agent')
-    let deviceModel
-    console.log(userAgent)
-    if (userAgent.includes('Android')) {
-      deviceModel = 'Android'
-    } else if (userAgent.includes('Windows')) {
-      deviceModel = 'Windows'
-    } else if (userAgent.includes('iPhone')) {
-      deviceModel = 'iPhone'
+    if (keyword.includes('\\')) {
+      ctx.body = {
+        status: 200,
+        messgage: 'success',
+        result: []
+      }
     } else {
-      deviceModel = userAgent.slice(10, 20)
-    }
+      const ip = ctx.request.ip
+      const userAgent = ctx.request.get('User-Agent')
+      let deviceModel
+      if (userAgent.includes('Android')) {
+        deviceModel = 'Android'
+      } else if (userAgent.includes('Windows')) {
+        deviceModel = 'Windows'
+      } else if (userAgent.includes('iPhone')) {
+        deviceModel = 'iPhone'
+      } else {
+        deviceModel = userAgent.slice(10, 20)
+      }
 
-    db.query(
-      `INSERT INTO excel_log (date, deviceModel, ip, keyword)  VALUES ('${getDate()}', '${deviceModel}', '${ip}', '${keyword}');`
-    )
+      db.query(
+        `INSERT INTO excel_log (date, deviceModel, ip, keyword)  VALUES ('${getDate()}', '${deviceModel}', '${ip}', '${keyword}');`
+      )
 
-    const res = await db.query(
-      `select * from excel_data where name LIKE '%${keyword}%';`
-    )
-    ctx.body = {
-      status: 200,
-      messgage: 'success',
-      result: res.results
+      const res = await db.query(
+        `select * from excel_data where name LIKE '%${keyword}%';`
+      )
+      ctx.body = {
+        status: 200,
+        messgage: 'success',
+        result: res.results
+      }
     }
   })
 }

@@ -56,6 +56,7 @@ module.exports = () => {
     const ip = ctx.request.ip
     const userAgent = ctx.request.get('User-Agent')
     let deviceModel
+    console.log(deviceModel)
     if (userAgent.includes('Android')) {
       deviceModel = 'Android'
     } else if (userAgent.includes('Windows')) {
